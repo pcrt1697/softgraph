@@ -1,0 +1,25 @@
+spring:
+    application:
+        name: softgraph-backend-v1
+    neo4j:
+        uri: bolt://localhost:7687
+        authentication:
+            username: neo4j
+            password: password
+    jackson:
+        default-property-inclusion: non_null
+
+springdoc:
+    swagger-ui:
+        operationsSorter: method
+        tagsSorter: alpha
+    api-docs:
+        path: /docs
+
+server:
+    servlet:
+        context-path: /api
+
+logging:
+    level:
+        org.springframework.web.filter.CommonsRequestLoggingFilter: DEBUG

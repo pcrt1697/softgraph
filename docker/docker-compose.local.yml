@@ -1,0 +1,17 @@
+services:
+
+  neo4j:
+    container_name: neo4j
+    image: neo4j:5.26.9-ubi9
+    restart: always
+    hostname: neo4j
+    volumes:
+      - /$HOME/.softgraph/neo4j/logs:/logs
+      - /$HOME/.softgraph/neo4j/config:/config
+      - /$HOME/.softgraph/neo4j/data:/data
+      - /$HOME/.softgraph/neo4j/plugins:/plugins
+    environment:
+      - NEO4J_AUTH=neo4j/password
+    ports:
+      - "7474:7474"
+      - "7687:7687"
