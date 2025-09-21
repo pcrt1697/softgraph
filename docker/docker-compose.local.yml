@@ -1,3 +1,4 @@
+name: softgraph
 services:
 
   neo4j:

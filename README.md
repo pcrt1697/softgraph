@@ -13,6 +13,7 @@ Check out the graphiql [UI](http://localhost:8080/api/graphiql).
 GraphQL calls are POST /api/graphql.
 
 ## todo-list
+* Add endpoints to manage db connections and microservice calls
 * GraphQL
 * Add java container, see [here](https://github.com/docker/awesome-compose/tree/master/spring-postgres)
 * Auth (?)
