@@ -1,7 +1,9 @@
-package com.pcrt.softgraph.model.node.batch;
+package com.pcrt.softgraph.model.node.database;
 
+import com.pcrt.softgraph.model.entity.database.DatabaseOperation;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 import org.springframework.data.neo4j.core.schema.CompositeProperty;
 import org.springframework.data.neo4j.core.schema.RelationshipId;
 import org.springframework.data.neo4j.core.schema.RelationshipProperties;
@@ -11,15 +13,17 @@ import java.util.Map;
 
 @Getter
 @Setter
+@ToString
 @RelationshipProperties
-public class BatchInvocationRelationship {
+public class DatabaseConnectionRelationship {
 
     @RelationshipId
     private Long id;
-    private Integer order;
+    @TargetNode
+    private DatabaseNode database;
+    private DatabaseOperation operation;
+    private String entityName;
     @CompositeProperty
     private Map<String, Object> properties;
-    @TargetNode
-    private BatchNode batch;
 
 }

@@ -1,11 +1,14 @@
 package com.pcrt.softgraph.rest.controller;
 
+import com.pcrt.softgraph.model.entity.batch.BatchDetails;
 import com.pcrt.softgraph.model.entity.batch.BatchEntity;
 import com.pcrt.softgraph.model.entity.batch.BatchInvocationEntity;
 import com.pcrt.softgraph.model.input.BatchInput;
 import com.pcrt.softgraph.model.input.BatchInvocationInput;
 import com.pcrt.softgraph.model.page.BatchPageQuery;
+import com.pcrt.softgraph.rest.resource.BatchDetailsResource;
 import com.pcrt.softgraph.rest.assembler.BatchAssembler;
+import com.pcrt.softgraph.rest.assembler.BatchDetailsAssembler;
 import com.pcrt.softgraph.rest.assembler.BatchInvocationAssembler;
 import com.pcrt.softgraph.rest.openapi.ApiResponsesMixin;
 import com.pcrt.softgraph.service.batch.BatchService;
@@ -31,7 +34,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -48,9 +50,12 @@ public class BatchController {
     @Autowired
     private BatchInvocationAssembler invocationAssembler;
     @Autowired
-    protected PagedResourcesAssembler<BatchEntity> batchPageAssembler;
+    private PagedResourcesAssembler<BatchEntity> batchPageAssembler;
     @Autowired
-    protected PagedResourcesAssembler<BatchInvocationEntity> batchInvocationPageAssembler;
+    private PagedResourcesAssembler<BatchInvocationEntity> batchInvocationPageAssembler;
+    @Autowired
+    private BatchDetailsAssembler batchDetailsAssembler;
+
 
     @GetMapping("/{id}")
     @Operation(summary = "Find batch application by ID")
@@ -97,13 +102,13 @@ public class BatchController {
         return ResponseEntity.ok(batchPageAssembler.toModel(page, this.batchAssembler));
     }
 
-    @GetMapping("/{id}/batch-invocations")
-    @Operation(summary = "Search batch invocations", description = "Search batch applications invoked by the resource. Results are sorted by: order and id.")
-    public ResponseEntity<PagedModel<EntityModel<BatchInvocationEntity>>> searchBatchInvocations(
-            @PathVariable Long id, @RequestParam Integer pageSize, @RequestParam Integer pageNumber, @RequestParam(defaultValue = "ASC") Sort.Direction sortDirection
+    @GetMapping("/{id}/details")
+    @Operation(summary = "Get batch details")
+    public ResponseEntity<EntityModel<BatchDetailsResource>> getDetails(
+            @PathVariable Long id
     ) {
-        Page<BatchInvocationEntity> page = batchService.searchInvocations(id, pageNumber, pageSize, sortDirection);
-        return ResponseEntity.ok(batchInvocationPageAssembler.toModel(page, invocationAssembler));
+        BatchDetails details = batchService.getDetails(id);
+        return ResponseEntity.ok(batchDetailsAssembler.entityToModel(details));
     }
 
     @PostMapping("/{id}/batch-invocations")
@@ -120,7 +125,7 @@ public class BatchController {
     public ResponseEntity<?> deleteBatchInvocation(
             @PathVariable Long id
     ) {
-        batchService.delete(id);
+        batchService.deleteInvocation(id);
         return ResponseEntity.noContent().build();
     }
 

@@ -2,8 +2,8 @@ package com.pcrt.softgraph.model.node.batch;
 
 import com.pcrt.softgraph.model.entity.ProgrammingLanguage;
 import com.pcrt.softgraph.model.node.ComponentNode;
-import com.pcrt.softgraph.model.node.database.DatabaseConnection;
-import com.pcrt.softgraph.model.node.microservice.MicroserviceCall;
+import com.pcrt.softgraph.model.node.database.DatabaseConnectionRelationship;
+import com.pcrt.softgraph.model.node.microservice.MicroserviceCallRelationship;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -30,17 +30,17 @@ public class BatchNode extends ComponentNode {
     private Map<String, Object> properties;
 
     @Relationship(type = "INVOKES", direction = Relationship.Direction.OUTGOING)
-    private List<BatchInvocationRelationship> batches;
+    private List<BatchInvocationRelationship> invokedBatches;
     @Relationship(type = "CONNECTED_TO", direction = Relationship.Direction.OUTGOING)
-    private List<DatabaseConnection> databases;
+    private List<DatabaseConnectionRelationship> databaseConnections;
     @Relationship(type = "CALLS", direction = Relationship.Direction.OUTGOING)
-    private List<MicroserviceCall> microservices;
+    private List<MicroserviceCallRelationship> microserviceCalls;
 
     public void addBatchInvocations(List<BatchInvocationRelationship> invocations) {
-        if (this.batches == null) {
-            this.batches = new ArrayList<>();
+        if (this.invokedBatches == null) {
+            this.invokedBatches = new ArrayList<>();
         }
-        this.batches.addAll(invocations);
+        this.invokedBatches.addAll(invocations);
     }
 
 }

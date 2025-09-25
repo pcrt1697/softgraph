@@ -26,7 +26,7 @@ public class BatchInvocationInput {
         private Long idBatch;
         @Min(0)
         private Integer order;
-        private Map<String, Object> parameters;
+        private Map<String, Object> properties;
     }
 
 }

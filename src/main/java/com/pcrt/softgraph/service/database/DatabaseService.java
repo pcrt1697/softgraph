@@ -2,7 +2,9 @@ package com.pcrt.softgraph.service.database;
 
 import com.pcrt.softgraph.exception.ResourceNotFoundException;
 import com.pcrt.softgraph.model.entity.database.DatabaseEntity;
+import com.pcrt.softgraph.model.input.DatabaseConnectionInput;
 import com.pcrt.softgraph.model.input.DatabaseInput;
+import com.pcrt.softgraph.model.node.database.DatabaseConnectionRelationship;
 import com.pcrt.softgraph.model.node.database.DatabaseNode;
 import com.pcrt.softgraph.model.page.DatabasePageQuery;
 import com.pcrt.softgraph.repository.DatabaseRepository;
@@ -11,6 +13,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class DatabaseService {
 
@@ -18,6 +22,8 @@ public class DatabaseService {
     private DatabaseRepository repository;
     @Autowired
     private DatabaseMapper mapper;
+    @Autowired
+    private DatabaseConnectionMapper connectionMapper;
 
     public DatabaseEntity findByIdOrThrow(Long id) {
         return this.findByIdOrThrow(id, DatabaseEntity.class);
@@ -43,6 +49,17 @@ public class DatabaseService {
 
     public Page<DatabaseEntity> search(DatabasePageQuery pageQuery, Pageable pageable) {
         return repository.findBy(pageQuery.toExample(), pageable, DatabaseEntity.class);
+    }
+
+    public List<DatabaseConnectionRelationship> createDatabaseConnection(DatabaseConnectionInput input) {
+        return input.getDatabases().stream().map(
+                item -> connectionMapper.toRelationship(
+                        item.getOperation(),
+                        item.getEntityName(),
+                        item.getProperties(),
+                        this.findByIdOrThrow(item.getIdDatabase(), DatabaseNode.class)
+                )
+        ).toList();
     }
 
 }
