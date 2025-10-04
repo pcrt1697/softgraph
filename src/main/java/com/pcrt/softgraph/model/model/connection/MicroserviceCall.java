@@ -1,7 +1,5 @@
 package com.pcrt.softgraph.model.model.connection;
 
-import com.pcrt.softgraph.model.model.component.ComponentModel;
-import com.pcrt.softgraph.model.model.component.Microservice;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -15,6 +13,4 @@ import lombok.ToString;
 @Schema(description = "Representation of a microservice call connection")
 public class MicroserviceCall extends ConnectionModel {
     private String endpoint;
-    private ComponentModel caller;
-    private Microservice microservice;
 }

@@ -35,6 +35,8 @@ public abstract class ConnectionModel {
     private Long id;
     private ConnectionType type;
     private String description;
+    private Long idSource;
+    private Long idTarget;
     private Instant tsCreate;
     private Instant tsUpdate;
 }

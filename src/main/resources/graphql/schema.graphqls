@@ -1,0 +1,161 @@
+# --- SCALARS ---
+scalar Long
+scalar DateTime
+
+
+# --- ENUMS ---
+enum ComponentType {
+    MICROSERVICE, DATABASE, BATCH
+}
+enum ConnectionType {
+    BATCH_INVOCATION, DATABASE_CONNECTION, MICROSERVICE_CALL
+}
+enum ProgrammingLanguage {
+    PYTHON, JAVA, JAVASCRIPT, C, SCALA, BASH
+}
+enum DatabaseTechnology {
+    MONGODB, POSTGRESQL, NEO4J, MYSQL, ORACLE, SQLSERVER, BIGQUERY
+}
+enum DatabaseOperation {
+    READ, WRITE, DELETE, ANY
+}
+
+
+# --- TYPES ---
+interface Component {
+    id: Long!
+    type: ComponentType!
+    name: String!
+    documentationUrl: String
+    description: String
+    tsCreate: DateTime!
+    tsUpdate: DateTime!
+}
+type Batch implements Component {
+    id: Long!
+    type: ComponentType!
+    name: String!
+    documentationUrl: String
+    description: String
+    tsCreate: DateTime!
+    tsUpdate: DateTime!
+    programmingLanguage: ProgrammingLanguage!
+    repositoryUrl: String
+    cronExpression: String
+}
+type Database implements Component {
+    id: Long!
+    type: ComponentType!
+    name: String!
+    documentationUrl: String
+    description: String
+    tsCreate: DateTime!
+    tsUpdate: DateTime!
+    technology: DatabaseTechnology!
+    serviceUrl: String
+}
+type Microservice implements Component {
+    id: Long!
+    type: ComponentType!
+    name: String!
+    documentationUrl: String
+    description: String
+    tsCreate: DateTime!
+    tsUpdate: DateTime!
+    programmingLanguage: ProgrammingLanguage!
+    repositoryUrl: String
+    serviceUrl: String
+}
+
+interface Connection {
+    id: Long!
+    type: ConnectionType!
+    description: String
+    idSource: Long!
+    idTarget: Long!
+    tsCreate: DateTime!
+    tsUpdate: DateTime!
+}
+type BatchInvocation implements Connection {
+    id: Long!
+    type: ConnectionType!
+    description: String
+    idSource: Long!
+    idTarget: Long!
+    tsCreate: DateTime!
+    tsUpdate: DateTime!
+    order: Int
+}
+type DatabaseConnection implements Connection {
+    id: Long!
+    type: ConnectionType!
+    description: String
+    idSource: Long!
+    idTarget: Long!
+    tsCreate: DateTime!
+    tsUpdate: DateTime!
+    entity: String
+    operation: DatabaseOperation!
+}
+type MicroserviceCall implements Connection {
+    id: Long!
+    type: ConnectionType!
+    description: String
+    idSource: Long!
+    idTarget: Long!
+    tsCreate: DateTime!
+    tsUpdate: DateTime!
+    endpoint: String
+}
+
+interface Page {
+    totalPages: Int
+    totalElements: Int
+    number: Int
+    size: Int
+}
+type ComponentPage implements Page {
+    content: [Component]
+    totalPages: Int
+    totalElements: Int
+    number: Int
+    size: Int
+}
+type ConnectionPage implements Page {
+    content: [Connection]
+    totalPages: Int
+    totalElements: Int
+    number: Int
+    size: Int
+}
+
+# --- INPUTS ---
+input PageDefinition {
+    page: Int!
+    size: Int!
+}
+input ComponentQuery {
+    type: ComponentType
+    name: String
+    programmingLanguage: ProgrammingLanguage
+    technology: DatabaseTechnology
+    cronExpression: String
+    serviceUrl: String
+}
+input ConnectionQuery {
+    type: ConnectionType
+    batchOrder: Int
+    databaseEntity: String
+    databaseOperation: DatabaseOperation
+    microserviceEndpoint: String
+    idSource: Long
+    idTarget: Long
+}
+
+# --- QUERY ---
+type Query {
+    component(id: Long!): Component
+    searchComponents(query: ComponentQuery, page: PageDefinition!): ComponentPage
+    connection(id: Long!): Connection
+    searchConnections(query: ConnectionQuery, page: PageDefinition!): ConnectionPage
+}

@@ -21,5 +21,6 @@ public class DatabaseConnectionInput extends ConnectionInput {
     @Schema(description = "Identifier of the database")
     private Long idTarget;
     private String entity;
+    @NotNull
     private DatabaseOperation operation;
 }
