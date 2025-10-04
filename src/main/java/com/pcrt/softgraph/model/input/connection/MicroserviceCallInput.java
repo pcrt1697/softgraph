@@ -14,8 +14,10 @@ import lombok.ToString;
 @Schema(description = "Object used to create a new microservice call connection")
 public class MicroserviceCallInput extends ConnectionInput {
     @NotNull
-    private Long idMicroservice;
+    @Schema(description = "Identifier of the called microservice")
+    private Long idTarget;
     @NotNull
-    private Long idCaller;
+    @Schema(description = "Identifier of the source microservice")
+    private Long idSource;
     private String endpoint;
 }

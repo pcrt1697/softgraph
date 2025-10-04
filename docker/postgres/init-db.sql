@@ -25,8 +25,8 @@ create table softgraph_app.connections (
 	id bigint not null generated always as identity,
 	type varchar(200) not null,
     description varchar(2000),
-    id_source bigint,
-    id_target bigint,
+    id_source bigint not null,
+    id_target bigint not null,
 
 	batch_order integer,
     database_entity varchar(1000),

@@ -29,10 +29,6 @@ public class DatabaseConnectionEntity extends ConnectionEntity {
     @Enumerated(EnumType.STRING)
     @Column(name = "database_operation")
     private DatabaseOperation operation;
-    @Column(name = "id_source")
-    private Long idComponent;
-    @Column(name = "id_target")
-    private Long idDatabase;
 
     @JoinColumn(name = "id_source", insertable=false, updatable=false)
     @ManyToOne

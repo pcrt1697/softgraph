@@ -7,8 +7,9 @@ Run the following command from the project root:
 docker-compose -f docker/docker-compose.local.yml up --force-recreate -d
 ```
 
-Check out the swagger [UI](http://localhost:8080/api/swagger-ui/index.html#/).
-Check out the graphiql [UI](http://localhost:8080/api/graphiql).
+Check out the [swagger UI](http://localhost:8080/api/swagger-ui/index.html#/).
+
+Check out the [graphiql UI](http://localhost:8080/api/graphiql).
 
 GraphQL calls are POST /api/graphql.
 

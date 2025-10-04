@@ -15,9 +15,11 @@ import lombok.ToString;
 @Schema(description = "Object used to create a new batch invocation connection")
 public class BatchInvocationInput extends ConnectionInput {
     @NotNull
-    private Long idInvoker;
+    @Schema(description = "Identifier of the invoker batch")
+    private Long idSource;
     @NotNull
-    private Long idBatch;
+    @Schema(description = "Identifier of the invoked batch")
+    private Long idTarget;
     @Min(value = 0, message = "Order must be non negative")
     private Integer order;
 }

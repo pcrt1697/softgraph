@@ -39,6 +39,10 @@ public abstract class ConnectionEntity {
     @Column(insertable = false, updatable = false)
     private ConnectionType type;
     private String description;
+    @Column(name = "id_source")
+    private Long idSource;
+    @Column(name = "id_target")
+    private Long idTarget;
     @CreatedDate
     @Column(name = "ts_create")
     private Instant tsCreate;

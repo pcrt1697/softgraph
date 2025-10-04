@@ -15,9 +15,11 @@ import lombok.ToString;
 @Schema(description = "Object used to create a new database connection")
 public class DatabaseConnectionInput extends ConnectionInput {
     @NotNull
-    private Long idComponent;
+    @Schema(description = "Identifier of the component")
+    private Long idSource;
     @NotNull
-    private Long idDatabase;
+    @Schema(description = "Identifier of the database")
+    private Long idTarget;
     private String entity;
     private DatabaseOperation operation;
 }

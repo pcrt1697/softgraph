@@ -5,7 +5,6 @@ import com.pcrt.softgraph.model.model.connection.ConnectionType;
 import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import lombok.EqualsAndHashCode;
@@ -23,10 +22,6 @@ public class BatchInvocationEntity extends ConnectionEntity {
 
     @Column(name = "batch_order")
     private Integer order;
-    @Column(name = "id_source")
-    private Long idInvoker;
-    @Column(name = "id_target")
-    private Long idBatch;
 
     @JoinColumn(name = "id_source", insertable=false, updatable=false)
     @ManyToOne
