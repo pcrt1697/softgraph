@@ -1,0 +1,24 @@
+[
+  {
+    "type": "BATCH_INVOCATION",
+    "description": "First batch invoked",
+    "idInvoker": 1,
+    "idBatch": 2,
+    "order": 1
+  },
+  {
+    "type": "DATABASE_CONNECTION",
+    "description": "a description",
+    "idComponent": 2,
+    "idDatabase": 5,
+    "entity": "schema1.collection1",
+    "operation": "READ"
+  },
+  {
+    "type": "MICROSERVICE_CALL",
+    "description": "a description",
+    "idMicroservice": 8,
+    "idCaller": 7,
+    "endpoint": "POST endpoint/subpath/1"
+  }
+]

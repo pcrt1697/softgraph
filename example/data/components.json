@@ -1,0 +1,70 @@
+[
+  {
+    "type": "BATCH",
+    "name": "batch-1",
+    "documentationUrl": "doc/url/of/batch/1",
+    "description": "description of batch 1",
+    "programmingLanguage": "BASH",
+    "repositoryUrl": "repo/url/of/batch/1",
+    "cronExpression": "0 0 12 * * ?"
+  },
+  {
+    "type": "BATCH",
+    "name": "batch-2",
+    "documentationUrl": "doc/url/of/batch/2",
+    "description": "description of batch 2",
+    "programmingLanguage": "PYTHON",
+    "repositoryUrl": "repo/url/of/batch/2"
+  },
+  {
+    "type": "BATCH",
+    "name": "batch-3",
+    "documentationUrl": "doc/url/of/batch/3",
+    "description": "description of batch 3",
+    "programmingLanguage": "JAVA",
+    "repositoryUrl": "repo/url/of/batch/3"
+  },
+  {
+    "type": "BATCH",
+    "name": "batch-4",
+    "documentationUrl": "doc/url/of/batch/4",
+    "description": "description of batch 4",
+    "programmingLanguage": "BASH",
+    "repositoryUrl": "repo/url/of/batch/4",
+    "cronExpression": "0 0 11 * * ?"
+  },
+  {
+    "type": "DATABASE",
+    "name": "database-1",
+    "documentationUrl": "doc/url/of/database/1",
+    "description": "description of database 1",
+    "technology": "MONGODB",
+    "serviceUrl": "service/url/of/database/1"
+  },
+  {
+    "type": "DATABASE",
+    "name": "database-2",
+    "documentationUrl": "doc/url/of/database/2",
+    "description": "description of database 2",
+    "technology": "POSTGRESQL",
+    "serviceUrl": "service/url/of/database/2"
+  },
+  {
+    "type": "MICROSERVICE",
+    "name": "microservice-1",
+    "documentationUrl": "doc/url/of/microservice/1",
+    "description": "description of microservice 1",
+    "programmingLanguage": "JAVA",
+    "serviceUrl": "service/url/of/microservice/1",
+    "repositoryUrl": "repo/url/of/microservice/1"
+  },
+  {
+    "type": "MICROSERVICE",
+    "name": "microservice-2",
+    "documentationUrl": "doc/url/of/microservice/2",
+    "description": "description of microservice 2",
+    "programmingLanguage": "PYTHON",
+    "serviceUrl": "service/url/of/microservice/2",
+    "repositoryUrl": "repo/url/of/microservice/2"
+  }
+]

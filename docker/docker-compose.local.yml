@@ -1,0 +1,17 @@
+name: softgraph
+services:
+
+  postgres:
+    container_name: postgres
+    image: postgres:17-alpine
+    restart: always
+    hostname: postgres
+    ports:
+      - 5432:5432
+    volumes:
+      - /$HOME/.softgraph/postgres/data:/var/lib/postgresql/data
+      - ./postgres/init-db.sql:/docker-entrypoint-initdb.d/init-db.sql
+    environment:
+      - POSTGRES_PASSWORD=${SOFTGRAPH_PG_PWD:-softgraph}
+      - POSTGRES_USER=${SOFTGRAPH_PG_USR:-softgraph}
+      - POSTGRES_DB=softgraph

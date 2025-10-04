@@ -1,0 +1,36 @@
+spring:
+    application:
+        name: softgraph-backend-v1
+    datasource:
+        url: jdbc:postgresql://localhost:5432/softgraph
+        username: softgraph
+        password: softgraph
+        driver-class-name: org.postgresql.Driver
+    jpa:
+        database: POSTGRESQL
+        database-platform: org.hibernate.dialect.PostgreSQLDialect
+        properties:
+            hibernate:
+                default_schema: softgraph_app
+    jackson:
+        default-property-inclusion: non_null
+    graphql:
+        graphiql:
+            enabled: true
+
+springdoc:
+    swagger-ui:
+        operationsSorter: method
+        tagsSorter: alpha
+    api-docs:
+        path: /docs
+    info:
+        title: "A title"
+
+server:
+    servlet:
+        context-path: /api
+
+logging:
+    level:
+        org.springframework.web.filter.CommonsRequestLoggingFilter: DEBUG
