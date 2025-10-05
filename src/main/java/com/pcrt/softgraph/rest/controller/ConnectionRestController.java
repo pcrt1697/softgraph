@@ -16,6 +16,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.PagedModel;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -28,7 +29,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(
-        value = "/v1/connections"
+        value = "/v1/connections",
+        consumes = MediaType.APPLICATION_JSON_VALUE
 )
 @Tag(name = "connection")
 public class ConnectionRestController {
@@ -49,7 +51,9 @@ public class ConnectionRestController {
         return ResponseEntity.ok(assembler.toModel(model));
     }
 
-    @PostMapping
+    @PostMapping(
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
     @Operation(summary = "Create new connection")
     public ResponseEntity<EntityModel<ConnectionModel>> create(
             @Validated @RequestBody ConnectionInput input

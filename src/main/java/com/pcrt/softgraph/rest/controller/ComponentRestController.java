@@ -16,6 +16,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.PagedModel;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -28,7 +29,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(
-        value = "/v1/components"
+        value = "/v1/components",
+        produces = MediaType.APPLICATION_JSON_VALUE
 )
 @Tag(name = "component")
 public class ComponentRestController {
@@ -49,7 +51,9 @@ public class ComponentRestController {
         return ResponseEntity.ok(assembler.toModel(model));
     }
 
-    @PostMapping
+    @PostMapping(
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
     @Operation(summary = "Create new software component")
     public ResponseEntity<EntityModel<ComponentModel>> create(
             @Validated @RequestBody ComponentInput input

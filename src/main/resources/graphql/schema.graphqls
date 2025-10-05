@@ -80,8 +80,8 @@ type BatchInvocation implements Connection {
     id: Long!
     type: ConnectionType!
     description: String
-    idSource: Long!
-    idTarget: Long!
+    idSource: Long! # identifier of the caller
+    idTarget: Long! # identifier of the called batch
     tsCreate: DateTime!
     tsUpdate: DateTime!
     order: Int
@@ -90,8 +90,8 @@ type DatabaseConnection implements Connection {
     id: Long!
     type: ConnectionType!
     description: String
-    idSource: Long!
-    idTarget: Long!
+    idSource: Long! # identifier of the microservice or batch
+    idTarget: Long! # identifier of the database
     tsCreate: DateTime!
     tsUpdate: DateTime!
     entity: String
@@ -101,8 +101,8 @@ type MicroserviceCall implements Connection {
     id: Long!
     type: ConnectionType!
     description: String
-    idSource: Long!
-    idTarget: Long!
+    idSource: Long! # identifier of the component that calls the microservice
+    idTarget: Long! # identifier of the called microservice
     tsCreate: DateTime!
     tsUpdate: DateTime!
     endpoint: String
@@ -131,8 +131,8 @@ type ConnectionPage implements Page {
 
 # --- INPUTS ---
 input PageDefinition {
-    page: Int!
-    size: Int!
+    page: Int! # page number (starting from 0)
+    size: Int! # size of the page (positive)
 }
 input ComponentQuery {
     type: ComponentType
