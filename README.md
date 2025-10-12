@@ -3,8 +3,7 @@ Backend application to store software architecture metadata
 
 #### Table of content
 * [Overview](#overview)
-  * [Concepts](#concepts)
-  * [Backend design](#backend-design)
+* [Concepts](#concepts)
 * [Quickstart](#quickstart)
 * [Next steps](#next-steps)
 
@@ -15,12 +14,12 @@ Technology stack:
 * PostgreSQL database;
 * Spring backend application with both REST and GraphQL APIs (secured by api key authentication).
 
-### Concepts
+## Concepts
 There are two main entities: components and connections. Each kind of entity belongs to a certain type.
 
 Adding new component types is quite straightforward since everything is managed using polymorphic types. 
 
-#### Components
+### Components
 A component is an atomic piece of software, there are three types of component:
 * **batch**: a batch application that is typically executed by a scheduler;
 * **database**: a database instance;
@@ -28,7 +27,7 @@ A component is an atomic piece of software, there are three types of component:
 
 Components are stored in the `components` table.
 
-#### Connections
+### Connections
 A connection is a relationship between components, there are three types of connections:
 * **batch-invocation**: used when a batch component invokes another batch program;
 * **database-connection**: used to describe a connection from an application to a database;
@@ -45,10 +44,11 @@ Where:
 * SOFTGRAPH_API_KEY: is the api key used to authenticate to the service;
 * SOFTGRAPH_PG_PWD: password of the user `softgraph` (used by the backed application).
 
-Use the [docker-compose.local.yml](docker/docker-compose.local.yml) to start an empty project.
+Check out:
+* The [swagger UI](http://localhost:8080/api/swagger-ui/index.html#/) (requests must be authenticated with the provided API key).
+* The [graphiql UI](http://localhost:8080/api/graphiql) (to fetch the schema add the header key `x-api-key` and hit the refresh button).
 
-* Checkout the [swagger UI](http://localhost:8080/api/swagger-ui/index.html#/). Note that requests must be authenticated with the provided API key.
-* Check out the [graphiql UI](http://localhost:8080/api/graphiql). To fetch the schema add the header key `x-api-key` and hit the refresh button.
+Use the [docker-compose.local.yml](docker/docker-compose.local.yml) to start an empty project.
 
 ## Next steps
 To-do list:
