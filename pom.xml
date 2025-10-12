@@ -97,6 +97,7 @@
 							<artifactId>lombok</artifactId>
 						</exclude>
 					</excludes>
+					<mainClass>com.pcrt.softgraph.SoftGraphBackendApplication</mainClass>
 				</configuration>
 			</plugin>
 			<plugin>

@@ -10,7 +10,8 @@ services:
       - 5432:5432
     volumes:
       - /$HOME/.softgraph/postgres/data:/var/lib/postgresql/data
-      - ./postgres/init-db.sql:/docker-entrypoint-initdb.d/init-db.sql
+      - ./postgres/init-db.sql:/docker-entrypoint-initdb.d/00-init-db.sql
+      - ./postgres/dump-demo.sql:/docker-entrypoint-initdb.d/01-dump-demo.sql
     environment:
       - POSTGRES_PASSWORD=${SOFTGRAPH_PG_PWD:-softgraph}
       - POSTGRES_USER=softgraph
